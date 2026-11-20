@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Vanesa 💖</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:'Segoe UI',system-ui,sans-serif;background:#ffeef5;overflow-x:hidden;min-height:100vh}
+.contenedor{max-width:520px;margin:auto;padding:20px 16px 40px;text-align:center;position:relative;z-index:2}
+.tarjeta{background:white;border-radius:28px;padding:28px 20px;box-shadow:0 10px 30px rgba(255,105,180,.25);border:3px solid #ffc0d9}
+.kitty{font-size:90px;line-height:1;animation:flota 2.5s ease-in-out infinite}
+@keyframes flota{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}
+h1{color:#e91e7a;font-size:30px;margin:10px 0 5px;line-height:1.1}
+h1 span{font-size:18px;display:block;color:#ff6fae;margin-top:6px}
+p{color:#666;font-size:16px;line-height:1.5}
+.btn{border:none;padding:15px 22px;border-radius:999px;font-weight:800;font-size:17px;cursor:pointer;width:100%;margin-top:10px;transition:.2s}
+.btn-rosa{background:#ff4d8d;color:white;box-shadow:0 6px 0 #d81b6d}
+.btn-rosa:active{transform:translateY(3px);box-shadow:0 2px 0 #d81b6d}
+.btn-blanco{background:#fff0f6;color:#e91e7a;border:2px solid #ffc0d9}
+#mensaje{margin-top:16px;min-height:60px;font-size:18px;color:#d81b6d;font-weight:700;line-height:1.4}
+.corazon{position:fixed;bottom:-20px;font-size:22px;animation:subir linear forwards;z-index:1;pointer-events:none}
+@keyframes subir{to{transform:translateY(-110vh) rotate(360deg);opacity:0}}
+.barra{height:14px;background:#ffe0ee;border-radius:999px;overflow:hidden;margin:14px 0}
+#relleno{height:100%;width:0%;background:linear-gradient(90deg,#ff4d8d,#ffb6d1);transition:width .5s;border-radius:999px}
+.foto{font-size:50px}
+.peque{font-size:12px;color:#aaa;margin-top:16px}
+</style>
+</head>
+<body>
+<div class="contenedor">
+<div class="tarjeta">
+<div class="kitty">🎀🐱🎀</div>
+<h1>Para Vanesa 💖<span>de parte de Ricardo</span></h1>
+<p>Hola mi amor, te hice esto porque quería decirte algo importante...</p>
+
+<div class="barra"><div id="relleno"></div></div>
+<p style="font-size:13px;margin:0">Nivel de amor de Ricardo por Vanesa: <b id="porcentaje">0%</b></p>
+
+<div id="mensaje">Toca el botón de abajo 👇</div>
+
+<button class="btn btn-rosa" onclick="amar()">💖 Apretar para llenar de amor</button>
+<button class="btn btn-blanco" onclick="sorpresa()">🎁 Tengo una sorpresa para ti</button>
+<button class="btn btn-blanco" onclick="razon()">💌 Dime por qué me quieres</button>
+
+<div style="margin-top:18px;font-size:28px">🌸 💗 🌸 💗 🌸</div>
+<p><b>Ricardo quiere mucho a Vanesa</b><br>hoy, mañana y siempre.</p>
+<p class="peque">Hecho con mucho amor por Ricardo • Solo para Vanesa</p>
+</div>
+</div>
+
+<script>
+let amor = 0;
+let frases = [
+  "Vanesa, eres lo más bonito que me ha pasado 💖",
+  "Cada que pienso en ti me pongo feliz como Hello Kitty 🐱🎀",
+  "Ricardo te quiere MUCHÍSIMO, en serio, muchísimo 💗",
+  "Eres mi persona favorita en todo el mundo 🌎💖",
+  "¿Ya te dije que estás hermosa hoy? Pues lo estás 😍"
+];
+let razones = [
+  "Porque tu sonrisa me hace el día 💖",
+  "Porque eres linda, tierna y única 🐱",
+  "Porque cuando hablo contigo todo se siente mejor 🌸",
+  "Porque eres tú, y eso ya es perfecto 💗",
+  "Porque Ricardo no deja de pensar en Vanesa ✨"
+];
+function amar(){
+  amor = Math.min(100, amor + 20);
+  document.getElementById('relleno').style.width = amor + '%';
+  document.getElementById('porcentaje').textContent = amor + '%';
+  document.getElementById('mensaje').textContent = frases[Math.floor(Math.random()*frases.length)];
+  for(let i=0;i<12;i++) crearCorazon();
+  if(amor >= 100){
+    document.getElementById('mensaje').innerHTML = "¡LLEGÓ AL 100%! 💖<br>Ricardo te ama INFINITO, Vanesa. No hay número que alcance.";
+    for(let i=0;i<30;i++) setTimeout(crearCorazon, i*80);
+  }
+}
+function sorpresa(){
+  document.getElementById('mensaje').innerHTML = "🎁 Tu sorpresa es...<br>¡Un abrazo gigante de Ricardo!<br>🤗💖🤗<br>Y un beso... 😘";
+  for(let i=0;i<20;i++) crearCorazon();
+}
+function razon(){
+  document.getElementById('mensaje').textContent = razones[Math.floor(Math.random()*razones.length)];
+  crearCorazon(); crearCorazon();
+}
+function crearCorazon(){
+  let c = document.createElement('div');
+  c.className = 'corazon';
+  c.textContent = ['💖','💗','💕','🎀','🌸'][Math.floor(Math.random()*5)];
+  c.style.left = Math.random()*100 + 'vw';
+  c.style.animationDuration = (2 + Math.random()*2) + 's';
+  c.style.fontSize = (18 + Math.random()*22) + 'px';
+  document.body.appendChild(c);
+  setTimeout(()=>c.remove(), 4000);
+}
+setInterval(crearCorazon, 1200);
+</script>
+</body>
+</html>
